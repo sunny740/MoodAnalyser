@@ -3,10 +3,11 @@
     public class MoodAnalyzer
     {
         public string message;
-        public MoodAnalyzer()
-        {
 
-        }
+        //public MoodAnalyzer()
+        //{
+
+        //}
         public MoodAnalyzer(string message)
         {
             this.message = message;
@@ -15,31 +16,24 @@
         {
             try
             {
-                if (message.Equals(" "))
-                {
-                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_MOOD, "Message is Empty");
-                }
                 if (message == null)
                 {
                     throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NULL_MOOD, "Message is Null");
                 }
-
-                if (message.ToLower().Contains("happy"))
+                if (message.Equals(""))
                 {
-                    return "Happy";
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_MOOD, "Message is Empty");
+
                 }
-                else
+                if (message.ToLower().Contains("sad"))
                 {
                     return "Sad";
                 }
+                return "Happy";
             }
-            catch (MoodAnalyserException)
+            catch (MoodAnalyserException ex)
             {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NULL_MOOD, "Message is Null");
-            }
-            catch (Exception)
-            {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_MOOD, "Message is Empty");
+                return ex.Message;
             }
         }
     }

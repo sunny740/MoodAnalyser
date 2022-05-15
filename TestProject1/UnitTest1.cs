@@ -6,21 +6,6 @@ namespace TestProject1
     public class Tests
     {
         [Test]
-        public void WhenAnalyzeMoodTest_InputAsNull_ShouldGive_Output_As_Null()
-        {
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
-            string actual = moodAnalyzer.AnalyzeMood();
-            Assert.AreEqual(actual, "Happy");
-        }
-        [Test]
-        public void WhenAnalyzeMoodTest_ShouldGive_Output_As_Sad()
-        {
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Sad Mood");
-            string actual = moodAnalyzer.AnalyzeMood();
-            Assert.AreEqual(actual, "Happy");
-        }
-
-        [Test]
         public void WhenAnalyzeMoodTest_ShouldGive_Output_As_Empty()
         {
             try
@@ -45,6 +30,20 @@ namespace TestProject1
             {
                 Assert.AreEqual(ex.Message, "Message is Null");
             }
+        }
+        [Test]
+        public void GivenMoodAnalyserClassName_ShouldReturnMoodAnalyserObject()
+        {
+            object expected = new MoodAnalyzer("");
+            object obj = MoodAnalyseFactory.CreateMoodAnalyse("MoodAnalyzer.AnalyseMood", "AnalyseMood");
+            expected.Equals(obj);
+        }
+        [Test]
+        public void GivenMoodAnalyserClassName_ShouldReturnMoodAnalyserObject_UsingParameterizedConstructor()
+        {
+            object expected = new MoodAnalyzer("HAPPY");
+            object obj = MoodAnalyseFactory.CreateMoodAnalyseUsingPrameterizedConstructor("MoodAnalyzer.AnalyseMood", "AnalyseMood", "HAPPY");
+            expected.Equals(obj);
         }
     }
 }
