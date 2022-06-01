@@ -34,7 +34,7 @@ namespace MoodAnalyser
         }
         public static object CreateMoodAnalyseUsingPrameterizedConstructor(string className, string constructorName, string message)
         {
-            Type type = typeof(AnalyzeMood);
+            Type type = typeof(MoodAnalyzer);
             if (type.Name.Equals(className) || type.FullName.Equals(className))
             {
                 if (type.Name.Equals(constructorName))
@@ -66,6 +66,25 @@ namespace MoodAnalyser
             catch (NullReferenceException)
             {
                 throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD, "Method not found");
+            }
+        }
+        public static string SetField(string message, string fieldName)
+        {
+            try
+            {
+                MoodAnalyzer moodAnalyzer = new MoodAnalyzer(message);
+                Type type = typeof(MoodAnalyzer);
+                FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                if (message == null)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_FIELD, "Message Should not be null");
+                }
+                field.SetValue(moodAnalyzer, message);
+                return moodAnalyzer.message;
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_FIELD, "Field is  not Found");
             }
         }
     }

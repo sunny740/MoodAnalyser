@@ -4,10 +4,10 @@
     {
         public string message;
 
-        //public MoodAnalyzer()
-        //{
-
-        //}
+        public MoodAnalyzer()
+        {
+            this.message = message;
+        }
         public MoodAnalyzer(string message)
         {
             this.message = message;
@@ -29,7 +29,10 @@
                 {
                     return "Sad";
                 }
-                return "Happy";
+                else
+                {
+                    return "Happy";
+                }
             }
             catch (MoodAnalyserException ex)
             {
